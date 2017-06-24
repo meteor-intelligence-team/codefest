@@ -1,6 +1,6 @@
 import htmlparser from "htmlparser2"
 
-const toKeep = [ "ul", "ol", "li" ]
+const toKeep = [ "ul", "ol", "li", "p" ]
 const titles = [ "h1", "h2", "h3", "h4", "h5", "h6" ]
 
 export const flatener = ({content}) => {
@@ -38,6 +38,9 @@ export const flatener = ({content}) => {
 
         //Cherche les caractères spéciaux créés par le parse du html et les supprime
         result = result.replace(/\n|\r|\t|\f\[\b]/gm, "").replace("<p></p>", "") + "</p>"
+        if(result.indexOf("</p>" === 0)){
+            result.replace("</p>", "")
+        }
         
         return { content: result }
 }

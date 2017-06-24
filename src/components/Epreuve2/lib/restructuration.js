@@ -22,16 +22,7 @@ export const restructuration = ({content}) => {
 
     console.log("----------- all results -----------")
     console.log(getH1, getH2, getH3, getH4, getH5, getH6)
-
-    if(getH6.length > 0){
-        if( getH2.length > 0 && getH3.length > 0 && getH4.length > 0 && getH5.length === 0  ){
-            content = content.replace(/h6/g, "h5")
-        } else if( getH2.length > 0 && getH3.length > 0 && getH4.length === 0 && getH5.length === 0  ){
-            content = content.replace(/h6/g, "h4")
-        } else if( getH2.length > 0 && getH3.length === 0 && getH4.length === 0 && getH5.length === 0  ){
-            content = content.replace(/h6/g, "h4")
-        } 
-    }
+    
 
     if(!getH1){
         error.reason = "Vous devez ajouter un titre (h1) afin de finir la restructuration de votre document."
