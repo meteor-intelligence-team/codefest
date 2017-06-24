@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import CodeFest             from "./components/CodeFest/CodeFest"
+import Editor             from "./components/YourComponent/Editor"
 
 import './App.css';
+import {Container, Header, Image} from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props){
@@ -18,7 +19,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CodeFest />
+      <Header textAlign="center" style={{ marginTop: 50 }}>Le staff</Header>
+      <Header textAlign="center">
+        <Image src="/jimmy.png" shape="circular"/>
+        <Image src="/logoNoir.png" shape="circular"/>
+        <Image src="/txm.png" shape="circular"/>
+      </Header>
+        <Container>
+          <Editor />
+        </Container>
       </div>
     );
   }
