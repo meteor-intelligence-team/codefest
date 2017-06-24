@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import Editor             from "./components/YourComponent/Editor"
 
 import './App.css';
-import {Container, Header, Image} from 'semantic-ui-react';
+import { Header, Image, Grid} from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
+import autoBind                     from "react-autobind"
 
 class App extends Component {
   constructor(props){
     super(props);
+    autoBind(this)
     this.state = {
-      loading: true
+      loading: true,
+      content: null
     }
   }
 
@@ -16,7 +20,14 @@ class App extends Component {
       this.setState({ loading: false })
   }
 
+  getContent({content}){
+    this.setState({content})
+    console.log(content)
+  }
+
   render() {
+
+    const { content } = this.state
     return (
       <div className="App">
       <Header textAlign="center" style={{ marginTop: 50 }}>Le staff</Header>
@@ -25,9 +36,18 @@ class App extends Component {
         <Image src="/logoNoir.png" shape="circular"/>
         <Image src="/txm.png" shape="circular"/>
       </Header>
-        <Container>
-          <Editor />
-        </Container>
+
+      <Grid>
+        <Grid.Column width={8}>
+          <Editor getContent={ this.getContent } />
+        </Grid.Column>
+        <Grid.Column width={8}>
+           <div dangerouslySetInnerHTML={{__html: content}}></div>
+        </Grid.Column>
+      </Grid>
+        
+          
+        
       </div>
     );
   }

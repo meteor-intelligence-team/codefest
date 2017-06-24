@@ -1,12 +1,29 @@
+import htmlparser from "htmlparser2"
+
 export const flatener = ({content}) => {
-    content.blocks.map((block, i) => {
-        content.blocks[i].inlineStyleRanges = []
-    })
-    Object.entries(content.entityMap).map((entity, i) => {
-        if(entity[1].type === "LINK"){
-            delete content.entityMap[entity[0]]
+    let result= ""
+    const parser = new htmlparser.Parser({
+        onopentag: (tagname, attribs) => {
+            if(tagname === "div"){
+                result += "<p>"
+            } else {
+                result += "<"+tagname+">"
+            }
+        },
+        ontext: (text) => {
+            result += text
+            console.log("-->", text);
+        },
+        onclosetag: (tagname) => {
+            if(tagname === "div"){
+                result += "</p>"
+            } else {
+                result += "</"+tagname+">"
+            }
         }
-    })
-    
-    return content
+    }, {decodeEntities: true});
+        parser.write(content);
+        parser.end();
+        
+        return { content: result }
 }

@@ -10,10 +10,12 @@
     "draft-js": "^0.10.1",
     "draft-js-export-html": "^0.5.4",
     "es6-shim": "^0.35.3",
+    "htmlparser2": "^3.9.2",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.5.2",
     "react-autobind": "^1.0.6",
     "react-dom": "^15.6.1",
+    "react-tinymce": "^0.5.1",
     "semantic-ui-css": "^2.2.10",
     "semantic-ui-react": "^0.68.3"
   },
