@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Editor             from "./components/YourComponent/Editor"
+import Editor             from "./components/Epreuve2/Editor"
 
 import './App.css';
 import { Header, Image, Grid} from 'semantic-ui-react';
@@ -22,7 +22,6 @@ class App extends Component {
 
   getContent({content}){
     this.setState({content})
-    console.log(content)
   }
 
   render() {
@@ -42,7 +41,7 @@ class App extends Component {
           <Editor getContent={ this.getContent } />
         </Grid.Column>
         <Grid.Column width={8}>
-           <div dangerouslySetInnerHTML={{__html: content}}></div>
+          <div dangerouslySetInnerHTML={{ __html: content}}></div>
         </Grid.Column>
       </Grid>
         

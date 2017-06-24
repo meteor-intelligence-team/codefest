@@ -1,34 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component }         from 'react';
 import autoBind                     from "react-autobind"
 import TinyMCE                      from 'react-tinymce';
-import {flatener}                   from "./lib/flatener" 
+import { flatener }                 from "./lib/flatener";
+import { restructuration }          from "./lib/restructuration";
 import {
   Button, 
   Dimmer, 
   Loader
-}                           from 'semantic-ui-react'
+}                                   from 'semantic-ui-react'
 
+import { exemple }                  from "./exemple"
 export default class Editor extends Component {
 
     constructor(props){
         super(props)
         autoBind(this)
         this.state = {
-            content: null
+            content: exemple
         }
+        this.alertOptions = {
+            offset: 14,
+            position: 'bottom left',
+            theme: 'dark',
+            time: 5000,
+            transition: 'scale'
+        };
     }
 
     handleEditorChange(e) {
-        const content = e.target.getContent()
+        let content = e.target.getContent()
         const flatenedContent = flatener({content})
         this.props.getContent(flatenedContent)
-        console.log(e, flatenedContent)
         this.setState({content: flatenedContent.content})
     }
 
     formatSrc(){
+        const { content } = this.state
         this.setState({ loading: true })
         setTimeout(() => {
+            restructuration({ content })
             this.setState({ loading: false })
         }, 500);
     }
@@ -53,32 +63,25 @@ export default class Editor extends Component {
                 config={{
                     height: 400,
                     menubar: false,
+                    themes: "inlite",
                     plugins: [
                         'lists image charmap print preview anchor',
                         'searchreplace visualblocks fullscreen',
                         'paste'
                         ],
-                    block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;',
-                    removeformat: [
-                        {selector: 'a,b,strong,em,i,font,u,strike,div,td,th,table,br,span', remove : 'all', split : true, expand : false, block_expand: true, deep : true},
-                        {selector: '*', attributes : ['style', 'class'], remove : 'all', split : false, expand : false, deep : true}
-                    ],
+                    branding: false,
                     toolbar: 'undo redo | styleselect | bullist numlist | image',
-                    //textcolor_map: textcolors,
                     content_css: [
-                        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
                         '//www.tinymce.com/css/codepen.min.css'
                     ],
                       style_formats: [
-                            {title: 'Headers', items: [
-                            {title: 'Header 1', format: 'h1'},
-                            {title: 'Header 2', format: 'h2'},
-                            {title: 'Header 3', format: 'h3'},
-                            {title: 'Header 4', format: 'h4'},
-                            {title: 'Header 5', format: 'h5'},
-                            {title: 'Header 6', format: 'h6'}
-                        ]}
-                    ]
+                            {title: 'Titre 1', format: 'h1'},
+                            {title: 'Titre 2', format: 'h2'},
+                            {title: 'Titre 3', format: 'h3'},
+                            {title: 'Titre 4', format: 'h4'},
+                            {title: 'Titre 5', format: 'h5'},
+                            {title: 'Titre 6', format: 'h6'}
+                        ]
                 }}
                 onChange={this.handleEditorChange}
             />

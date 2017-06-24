@@ -11,6 +11,7 @@
     "draft-js-export-html": "^0.5.4",
     "es6-shim": "^0.35.3",
     "htmlparser2": "^3.9.2",
+    "mx-react-toaster": "^1.1.5",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.5.2",
     "react-autobind": "^1.0.6",
