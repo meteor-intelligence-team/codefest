@@ -6,10 +6,13 @@ import { restructuration }          from "./lib/restructuration";
 import {
   Button, 
   Dimmer, 
-  Loader
+  Loader, 
+  Message
 }                                   from 'semantic-ui-react'
 
 import { exemple }                  from "./exemple"
+import 'semantic-ui-css/semantic.min.css';
+
 export default class Editor extends Component {
 
     constructor(props){
@@ -18,19 +21,18 @@ export default class Editor extends Component {
         this.state = {
             content: exemple
         }
-        this.alertOptions = {
-            offset: 14,
-            position: 'bottom left',
-            theme: 'dark',
-            time: 5000,
-            transition: 'scale'
-        };
     }
 
     handleEditorChange(e) {
         let content = e.target.getContent()
+
+        //lancement de la fonction d'applatissement du DOM HTML
         const flatenedContent = flatener({content})
+
+        //Envoi du resultat au composant parent pour affichage
         this.props.getContent(flatenedContent)
+
+        //Mise du résultat dans le state afin de fournir l'éditeur en data
         this.setState({content: flatenedContent.content})
     }
 
@@ -38,19 +40,24 @@ export default class Editor extends Component {
         const { content } = this.state
         this.setState({ loading: true })
         setTimeout(() => {
-            restructuration({ content })
-            this.setState({ loading: false })
+            const result = restructuration({ content })
+            if(result.error){
+                this.setState({ error : result.error.reason, loading: false, content: result.content })
+            } else {
+                this.setState({ loading: false, content: result.content })
+            }
         }, 500);
     }
 
 
     render() {
 
-        const { content, loading } = this.state
+        const { content, loading, error } = this.state
 
+        //Si le texte est en restructuration, montrer un loader
         if(loading){
             return(
-                <Dimmer active style={{ position: "absolute" }}>
+                <Dimmer active style={{ position: "absolute", minHeight: 200 }}>
                     <Loader/>
                 </Dimmer>
             )
@@ -85,6 +92,10 @@ export default class Editor extends Component {
                 }}
                 onChange={this.handleEditorChange}
             />
+            { error ? 
+                <Message error content={ error } header="Il y a une erreur"/>
+            : null }
+
 
             <Button onClick={ this.formatSrc } content="Rendre accessible" color="teal" style={{marginTop:15}}/>
 
