@@ -37,7 +37,7 @@ export default class Editor extends Component {
     }
 
     formatSrc(){
-        const { content } = this.state
+        let { content } = this.state
         this.setState({ loading: true })
         setTimeout(() => {
             const result = restructuration({ content })
@@ -57,7 +57,7 @@ export default class Editor extends Component {
         //Si le texte est en restructuration, montrer un loader
         if(loading){
             return(
-                <Dimmer active style={{ position: "absolute", minHeight: 200 }}>
+                <Dimmer active style={{ position: "absolute", minHeight: 400 }}>
                     <Loader/>
                 </Dimmer>
             )
