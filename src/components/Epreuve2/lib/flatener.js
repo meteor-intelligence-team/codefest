@@ -1,6 +1,6 @@
 import htmlparser from "htmlparser2"
 
-const toKeep = [ "ul", "ol", "li", "p" ]
+const toKeep = [ "ul", "ol", "li" ]
 const titles = [ "h1", "h2", "h3", "h4", "h5", "h6" ]
 
 export const flatener = ({content}) => {
@@ -19,7 +19,7 @@ export const flatener = ({content}) => {
             //Cherche les images et recrée la balise en supprimant style et classe
             } else if( tagname === "img"){
                 console.log(attribs)
-                result += "<p><img src=" + attribs.src + " alt=" + attribs.alt + " class=" + attribs.class + " height=" + attribs.height + " width=" +attribs.width + " /></p>"
+                result += "<p><img src=" + attribs.src + " alt=" + attribs.alt + " height=" + attribs.height + " width=" +attribs.width + " /></p>"
             }
         },
         ontext: (text) => {
@@ -37,10 +37,11 @@ export const flatener = ({content}) => {
         parser.end();
 
         //Cherche les caractères spéciaux créés par le parse du html et les supprime
-        result = result.replace(/\n|\r|\t|\f\[\b]/gm, "").replace("<p></p>", "") + "</p>"
+        result = result.replace(/\n|\r|\t|\f\[\b]/gm, "").replace(/<p><\/p>/g, "")
         if(result.indexOf("</p>" === 0)){
-            result.replace("</p>", "")
+            result = result.replace("<\/p>", "")
         }
+        console.log(result)
         
         return { content: result }
 }

@@ -27,7 +27,7 @@ export default class Editor extends Component {
         let content = e.target.getContent()
 
         //lancement de la fonction d'applatissement du DOM HTML
-        const flatenedContent = flatener({content})
+        let flatenedContent = flatener({content})
 
         //Envoi du resultat au composant parent pour affichage
         this.props.getContent(flatenedContent)
