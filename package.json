@@ -12,6 +12,7 @@
     "es6-shim": "^0.35.3",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.5.2",
+    "react-autobind": "^1.0.6",
     "react-dom": "^15.6.1",
     "semantic-ui-css": "^2.2.10",
     "semantic-ui-react": "^0.68.3"
