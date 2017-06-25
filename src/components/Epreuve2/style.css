@@ -1,0 +1,14 @@
+.mce-toolbar-grp, 
+.mce-toolbar-grp *, 
+.mce-container-body:not(#mceu_18-body) {
+    background-color: #00B5AD !important;
+    color: white !important;
+}
+
+.mce-caret {
+    border-top: 4px solid white !important;
+}
+.mce-panel {
+    border: 1px solid #00B5AD !important;
+    background-color: #f0f0f0;
+}

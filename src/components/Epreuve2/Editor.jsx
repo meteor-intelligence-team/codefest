@@ -12,7 +12,7 @@ import {
 
 import { exemple }                  from "./exemple"
 import 'semantic-ui-css/semantic.min.css';
-
+import "./style.css"
 export default class Editor extends Component {
 
     constructor(props){
@@ -66,7 +66,7 @@ export default class Editor extends Component {
         return (
         <div>
             <TinyMCE
-                content={this.state.content || ""}
+                content={ content || ""}
                 config={{
                     height: 400,
                     menubar: false,

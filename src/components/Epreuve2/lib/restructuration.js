@@ -1,13 +1,9 @@
-import htmlparser from "htmlparser2"
-import _ from "lodash"
-
 export const restructuration = ({content}) => {
     const error = {}
     let getH1 = []
 
     const domTree = []
     //getH2.push({ type: "h2", index: i, children: [] })
-    var indexh = 0
 
     //Récupération de l'index des différents titres présents dans le DOM
     for( let i = 0; i < content.length; i++ ) {
