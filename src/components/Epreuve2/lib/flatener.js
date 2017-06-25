@@ -33,15 +33,14 @@ export const flatener = ({content}) => {
             }
         }
     }, {decodeEntities: true});
-        parser.write(content);
-        parser.end();
+    parser.write(content);
+    parser.end();
 
-        //Cherche les caractères spéciaux créés par le parse du html et les supprime
-        result = result.replace(/\n|\r|\t|\f\[\b]/gm, "").replace(/<p><\/p>/g, "")
-        if(result.indexOf("</p>" === 0)){
-            result = result.replace("<\/p>", "")
-        }
-        console.log(result)
-        
-        return { content: result }
+    //Cherche les caractères spéciaux créés par le parse du html et les supprime
+    result = result.replace(/\n|\r|\t|\f\[\b]/gm, "").replace(/<p><\/p>/g, "")
+    if(result.indexOf("</p>" === 0)){
+        result = result.replace("<\/p>", "")
+    }
+    
+    return { content: result }
 }
